@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Cybersecurity Dashboard</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 0;
+            color: #111827;
+        }
+
+        .header {
+            background: #111827;
+            color: white;
+            padding: 28px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        .header p {
+            margin-top: 8px;
+            color: #cbd5e1;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1400px;
+            margin: 30px auto;
+        }
+
+        /* Scan Button */
+
+        .scan-section {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .scan-button {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            padding: 14px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: 0.2s;
+        }
+
+        .scan-button:hover {
+            background: #1d4ed8;
+        }
+
+        /* Cards */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 18px;
+        }
+
+        .card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .card h2 {
+            margin: 0;
+            font-size: 34px;
+        }
+
+        .card p {
+            margin-top: 10px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        /* Sections */
+
+        .section {
+            background: white;
+            margin-top: 30px;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h2 {
+            margin-top: 0;
+        }
+
+        /* Security Status */
+
+        .status {
+            background: #fee2e2;
+            color: #b91c1c;
+            padding: 14px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* Table */
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            min-width: 950px;
+        }
+
+        th,
+        td {
+            padding: 13px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background: #111827;
+            color: white;
+        }
+
+        tr:hover {
+            background: #f8fafc;
+        }
+
+        .threat {
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        .action {
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+        .ml-anomaly {
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        .ml-normal {
+            color: #16a34a;
+            font-weight: bold;
+        }
+
+        /* Footer */
+
+        .footer {
+            text-align: center;
+            padding: 25px;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+
+        @media (max-width: 1100px) {
+            .cards {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 450px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+
+    <div class="header">
+
+        <h1>AI Cybersecurity Dashboard</h1>
+
+        <p>
+            Threat Detection and Incident Response System
+        </p>
+
+    </div>
+
+
+    <div class="container">
+
+        <!-- Run Security Scan -->
+
+        <div class="scan-section">
+
+            <a href="/scan" class="scan-button">
+                🔍 RUN SECURITY SCAN
+            </a>
+
+        </div>
+
+
+        <!-- Dashboard Cards -->
+
+        <div class="cards">
+
+            <div class="card">
+
+                <h2>{{ total_threats }}</h2>
+
+                <p>
+                    Total Threats
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>{{ malware_count }}</h2>
+
+                <p>
+                    Malware Detected
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>{{ brute_force_count }}</h2>
+
+                <p>
+                    Brute Force
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>{{ high_traffic_count }}</h2>
+
+                <p>
+                    High Traffic
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>{{ ml_anomalies }}</h2>
+
+                <p>
+                    ML Anomalies
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Security Status -->
+
+        <div class="section">
+
+            <h2>
+                Security Status
+            </h2>
+
+            <div class="status">
+
+                ⚠️ Suspicious Activities Detected
+
+            </div>
+
+        </div>
+
+
+        <!-- Threat Details -->
+
+        <div class="section">
+
+            <h2>
+                Threat Details
+            </h2>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Timestamp
+                            </th>
+
+                            <th>
+                                Source IP
+                            </th>
+
+                            <th>
+                                Event Type
+                            </th>
+
+                            <th>
+                                ML Result
+                            </th>
+
+                            <th>
+                                Threat
+                            </th>
+
+                            <th>
+                                File
+                            </th>
+
+                            <th>
+                                Response Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for threat in threats %}
+
+                        <tr>
+
+                            <td>
+                                {{ threat["Timestamp"] }}
+                            </td>
+
+                            <td>
+                                {{ threat["Source IP"] }}
+                            </td>
+
+                            <td>
+                                {{ threat["Event Type"] }}
+                            </td>
+
+
+                            <td>
+
+                                {% if threat["ML Result"] == "Anomaly" %}
+
+                                <span class="ml-anomaly">
+                                    ⚠️ Anomaly
+                                </span>
+
+                                {% else %}
+
+                                <span class="ml-normal">
+                                    ✓ Normal
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <td class="threat">
+
+                                {{ threat["Threat"] }}
+
+                            </td>
+
+
+                            <td>
+
+                                {{ threat["File"] }}
+
+                            </td>
+
+
+                            <td class="action">
+
+                                {{ threat["Response Action"] }}
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Footer -->
+
+    <div class="footer">
+
+        AI-Based Autonomous Cybersecurity System
+        <br>
+        Threat Detection and Incident Response Prototype
+
+    </div>
+
+</body>
+
+</html>

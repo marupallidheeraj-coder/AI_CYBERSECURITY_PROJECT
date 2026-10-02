@@ -1,0 +1,9 @@
+timestamp,source_ip,event_type,failed_attempts,request_count,file_name,status
+2026-09-30 09:00:01,192.168.1.10,login,1,20,none,normal
+2026-09-30 09:01:15,192.168.1.15,login,8,35,none,suspicious
+2026-09-30 09:02:30,10.0.0.5,request,2,1500,none,suspicious
+2026-09-30 09:03:45,192.168.1.20,file_access,0,15,pdf_reader.exe,normal
+2026-09-30 09:04:10,10.0.0.8,file_access,0,10,malware.exe,suspicious
+2026-09-30 09:05:20,192.168.1.25,login,12,40,none,suspicious
+2026-09-30 09:06:35,192.168.1.30,request,1,2000,none,suspicious
+2026-09-30 09:07:50,192.168.1.40,file_access,0,12,chrome.exe,normal
